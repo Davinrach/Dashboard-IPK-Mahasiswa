@@ -3,6 +3,12 @@ import pandas as pd
 import plotly.express as px
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os
+
+def load_custom_css():
+    css_path = os.path.join(os.path.dirname(__file__), "style.css")
+    with open(css_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # Konfigurasi halaman
 st.set_page_config(
@@ -10,41 +16,8 @@ st.set_page_config(
     layout="wide"
 )
 
-# CSS sederhana untuk styling dasar
-st.markdown("""
-<style>
-    .main-title {
-        text-align: center;
-        color: #2E86C1;
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .subtitle {
-        text-align: center;
-        color: #566573;
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-    }
-    
-    .metric-box {
-        background-color: #EBF5FB;
-        padding: 1rem;
-        border-radius: 8px;
-        border-left: 4px solid #2E86C1;
-        margin: 0.5rem 0;
-    }
-    
-    .section-title {
-        color: #2E86C1;
-        font-size: 1.5rem;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        border-bottom: 2px solid #2E86C1;
-        padding-bottom: 0.5rem;
-    }
-</style>
-""", unsafe_allow_html=True)
+# Terapkan CSS kustom
+load_custom_css()
 
 # Header utama
 st.markdown('<h1 class="main-title">📊 Dashboard IPK Mahasiswa</h1>', unsafe_allow_html=True)
@@ -87,7 +60,7 @@ with st.expander("📚 Daftar Kode Program Studi"):
             st.write(f"**{code}**: {name}")
 
 # Ganti dengan nama file CSV Anda
-csv_file = "datavisdat.csv"
+csv_file = "resources/datavisdat.csv"
 
 try:
     # Membaca data CSV
